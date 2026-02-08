@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    padding-bottom: 3rem;
+    font-family: "Open Sans", sans-serif;
+    background-color: var(--body-bg);
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+:root {
+    --other-msg-bg: #efefef;
+    --my-msg-bg: #efefef;
+    --body-bg: #fff;
+    --text-color: black;
+}
+.create-date {
+    margin: 8px auto;
+    width: fit-content;
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 17px;
+}
+.create-date span {
+    color: #535353;
+    font-weight: 600;
+}
+#form {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 0.25rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 3rem;
+    box-sizing: border-box;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#input {
+    border: none;
+    padding: 0 1rem;
+    flex-grow: 1;
+    border-radius: 2rem;
+    margin: 0.25rem;
+}
+
+#input:focus {
+    outline: none;
+}
+
+#form > button {
+    background: #333;
+    border: none;
+    padding: 0 1rem;
+    margin: 0.25rem;
+    border-radius: 2rem;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+#messages {
+    list-style-type: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+#messages > li {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    background-color: #efefef;
+    background-color: var(--other-msg-bg);
+    margin-bottom: 16px;
+    position: relative;
+    border-radius: 16px 16px 16px 0px;
+    max-width: 90%;
+    line-break: anywhere;
+    color: var(--text-color);
+}
+#messages > li > span {
+    position: absolute;
+    font-size: 12px;
+    color: #6b6b6b;
+    bottom: -15px;
+    left: 0px;
+    display: inline-block;
+    width: 220px;
+}
+#messages > li > span > span {
+    font-size: 9px;
+    color: #dedede;
+}
+.my-message {
+    border-radius: 16px 16px 0px 16px !important;
+    align-self: flex-end;
+    background-color: var(--my-msg-bg) !important;
+}
+
+.my-message > span {
+    display: none !important;
+}
+.connection-msg-box {
+    width: 300px;
+    height: 100px;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.join,
+.disconnect {
+    left: 50%;
+    top: 10px;
+    transform: translateY(-50px);
+    background-color: #4caf50 !important;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    animation: disappear 4s forwards;
+    margin-bottom: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+}
+
+.disconnect {
+    background-color: #e91e63 !important;
+}
+
+.join span,
+.disconnect span {
+    padding-right: 5px;
+}
+
+@keyframes disappear {
+    10%,
+    80% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150px);
+        opacity: 0;
+    }
+}
+/* settings */
+.settings-box {
+    position: fixed;
+    left: -202px;
+    top: 0;
+    background-color: #fff;
+    width: 200px;
+    z-index: 100;
+    min-height: 100vh;
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+.settings-box.open {
+    left: 0;
+}
+.settings-box .settings-container .option-box {
+    padding: 10px;
+    text-align: center;
+    background-color: #dedede;
+    margin: 10px;
+}
+.settings-box .settings-container h4 {
+    color: #666;
+}
+.settings-box .settings-container .color-list {
+    list-style: none;
+    text-align: center;
+}
+.settings-box .settings-container span {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #eee;
+    outline: 2px solid transparent;
+    display: inline-block;
+}
+.settings-box .settings-container span.active {
+    outline-color: black;
+}
+.settings-box .settings-container span:first-child {
+    background-color: #efefef;
+}
+.settings-box .settings-container span:nth-child(2) {
+    background-color: #ff9800;
+}
+.settings-box .settings-container span:nth-child(3) {
+    background-color: #e91e63;
+}
+.settings-box .settings-container span:nth-child(4) {
+    background-color: #009688;
+}
+.settings-box .settings-container span:nth-child(5) {
+    background-color: #03a9f4;
+}
+
+.settings-box .settings-container span:last-child {
+    background-color: #4caf50;
+}
+.settings-box .toggle-settings {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px;
+    width: 40px;
+    text-align: center;
+    right: -46px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.settings-box.open svg {
+    animation: spin 2.5s linear infinite;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.typing-stats {
+    line-height: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

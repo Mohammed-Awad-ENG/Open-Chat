@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="icon.png" type="image/svg+xml">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Chat</title>
+    <meta name="description"
+        content="Open Chat - Free online chat platform to connect with friends, join chat rooms, and send messages.">
+    <meta name="keywords" content="chat, online messaging, free chat rooms, quick messaging">
+
+</head>
+
+<body>
+    <form class="Sign-in-form" id="join-form">
+        <h1>Join Chat</h1>
+        <div class="input-box">
+            <input type="text" id="name-input" placeholder="" autocomplete="off">
+            <label for="name-input">Name</label>
+        </div>
+        <div class="input-box">
+            <input type="text" id="code-input" placeholder="" autocomplete="off">
+            <label for="code-input" title="Join or create chat">Chat Code</label>
+        </div>
+        <button class="Sign-in-btn" type="submit">Sign In</button>
+        <ul class="gide">
+            <li>Enter a chat code to connect to an existing room or create a new one.</li>
+            <li>Anyone with a chat code can enter the chat.</li>
+            <li>No sign-up required to start chatting.</li>
+        </ul>
+    </form>
+</body>
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: white;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #6A11CB, #2575FC);
+    }
+
+    .Sign-in-form {
+        max-width: 400px;
+        width: 320px;
+
+        display: flex;
+        flex-direction: column;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        max-height: 500px;
+        height: 85vh;
+        border: 2px solid #fff;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .Sign-in-form h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    .input-box {
+        position: relative;
+    }
+
+    .input-box input {
+        width: 100%;
+        border: none;
+        outline: none;
+        height: 30px;
+        background-color: transparent;
+        border-bottom: 3px solid #fff;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .input-box label {
+        position: absolute;
+        left: 5px;
+        top: 30%;
+        transition: 0.3s;
+    }
+
+    .input-box input:focus+label,
+    .input-box input:not(:placeholder-shown)+label {
+        top: 5%;
+        left: 0;
+        font-size: 14px;
+    }
+
+    .Sign-in-btn {
+        background-color: #fff;
+        color: #000;
+        width: fit-content;
+        padding: 10px 20px;
+        border-radius: 20px;
+        align-self: center;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: 0.5s;
+        outline: none;
+        border: none;
+    }
+
+    .Sign-in-btn:hover {
+        transform: translateY(-6px);
+        box-shadow: 0px 0px 9px 1px #fff;
+    }
+    .gide {
+            padding: 10px;
+    }
+    .gide li {
+        margin-bottom: 5px;
+    }
+</style>
+<script>
+    function setBackgroundImage() {
+        document.body.style.backgroundImage = `url(https://picsum.photos/${window.innerWidth}/${window.innerHeight})`;
+    }
+    setBackgroundImage();
+    window.onresize = setBackgroundImage;
+
+
+    document.querySelector(".Sign-in-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name-input").value.trim();
+        const code = document.getElementById("code-input").value.trim();
+
+        if (!name || !code) {
+            alert("Name and Code is resquare");
+            return;
+        }
+
+        const url = `/chat-${encodeURIComponent(code)}?name=${encodeURIComponent(name)}`;
+        window.location.href = url;
+    });
+</script>
+
+</html>
