@@ -47,6 +47,13 @@ app.get("/chat-:id", (req, res) => {
     });
 });
 
+app.all(/.*/, (_, res) => {
+    const lostPage = fs.readFileSync(
+        path.join(__dirname, "pages", "lost_404.html"),
+        "utf8",
+    );
+    res.status(404).send(lostPage);
+});
 // -----------------------------------------------
 const io = new Server(server);
 
