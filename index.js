@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const server = http.createServer(app);
 const rateLimit = require("express-rate-limit");
+app.use(express.static(path.join(__dirname, "pages")));
 
 const limiter = rateLimit({
     windowMs: 60 * 1000,
@@ -57,7 +58,6 @@ app.all(/.*/, (_, res) => {
 // -----------------------------------------------
 const io = new Server(server);
 
-app.use(express.static(path.join(__dirname, "pages")));
 app.use(
     "/socket.io",
     express.static(path.join(__dirname, "node_modules/socket.io-client/dist")),
@@ -131,3 +131,4 @@ const port = 3000;
 server.listen(port, () =>
     console.log(`app listening on http://localhost:${port}`),
 );
+
