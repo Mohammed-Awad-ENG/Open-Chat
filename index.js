@@ -7,8 +7,6 @@ const fs = require("fs");
 const path = require("path");
 const server = http.createServer(app);
 const rateLimit = require("express-rate-limit");
-app.use(express.static(path.join(__dirname, "pages")));
-
 const limiter = rateLimit({
     windowMs: 60 * 1000,
     max: 50,
@@ -25,10 +23,11 @@ const pacePageModel = fs.readFileSync(
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "pages", "join.html"));
 });
+app.use(express.static(path.join(__dirname, "pages")));
 
-app.get("/chat", (req, res) => {
-    res.sendFile(path.join(__dirname, "pages", "index.html"));
-});
+// app.get("/chat", (req, res) => {
+//     res.sendFile(path.join(__dirname, "pages", "index.html"));
+// });
 
 app.get("/chat-:id", (req, res) => {
     const { id } = req.params;
@@ -58,11 +57,9 @@ app.all(/.*/, (_, res) => {
 // -----------------------------------------------
 const io = new Server(server);
 
-app.use(
-    "/socket.io",
-    express.static(path.join(__dirname, "node_modules/socket.io-client/dist")),
-);
 app.use(cors());
+app.use(express.static(path.join(__dirname, "pages")));
+
 function getTime() {
     const now = new Date();
 
@@ -131,4 +128,3 @@ const port = 3000;
 server.listen(port, () =>
     console.log(`app listening on http://localhost:${port}`),
 );
-
